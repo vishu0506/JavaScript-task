@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Task Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: rgb(192, 231, 218);
+    }
+
+    /* Centering container */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: rgb(203, 237, 230);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    section {
+      margin-bottom: 40px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+    }
+
+    button {
+      margin: 5px 0;
+      padding: 5px 10px;
+      background-color: gray;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    /* Hover effect */
+    button:hover {
+      background-color: #72df7d;
+    }
+
+    #output h3 {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- 1. Basic Info Form -->
+    <section>
+      <h2>1. Basic Information Form</h2>
+      <form id="infoForm">
+        Name: <input type="text" id="name"><br><br>
+        Mobile: <input type="text" id="mobile"><br><br>
+        Email: <input type="email" id="email"><br><br>
+        Gender:
+        <input type="radio" name="gender" value="Male"> Male
+        <input type="radio" name="gender" value="Female"> Female <br><br>
+        Education:
+        <input type="checkbox" value="10th">10th
+        <input type="checkbox" value="12th">12th
+        <input type="checkbox" value="Graduation">Graduation <br><br>
+        Do you like tea?
+        <select id="tea">
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select><br><br>
+        <button id="submitBtn" type="button" onclick="displayInfo()">Submit</button>
+      </form>
+      <div id="output" style="margin-top: 20px;"></div>
+    </section>
+
+    <!-- 2. Change Image -->
+    <section>
+      <h2>2. Change Image on Button Click</h2>
+      <img id="myImage" src="Types-of-Malware.png" width="150" height="150"><br><br>
+      <button onclick="changeImage()">Change Image</button>
+    </section>
+
+    <!-- 3. Increase/Decrease Font Size -->
+    <section>
+      <h2>3. Font Size Controller</h2>
+      <p id="text">This is some adjustable text!</p>
+      <button onclick="adjustFontSize(2)">Increase Font Size</button>
+      <button onclick="adjustFontSize(-2)">Decrease Font Size</button>
+    </section>
+
+    <!-- 4. Show Date and Time -->
+    <section>
+      <h2>4. Current Date and Time</h2>
+      <p id="datetime"></p>
+    </section>
+
+  </div>
+
+  <script>
+    // 1. Display Form Data
+    function displayInfo() {
+      let name = document.getElementById("name").value;
+      let mobile = document.getElementById("mobile").value;
+      let email = document.getElementById("email").value;
+      let gender = document.querySelector('input[name="gender"]:checked')?.value || 'Not selected';
+      
+      let education = [];
+      document.querySelectorAll('input[type="checkbox"]:checked').forEach(box => {
+        education.push(box.value);
+      });
+
+      let tea = document.getElementById("tea").value;
+
+      document.getElementById("output").innerHTML = `
+        <h3>Submitted!</h3>
+        <strong>Name:</strong> ${name}<br>
+        <strong>Mobile:</strong> ${mobile}<br>
+        <strong>Email:</strong> ${email}<br>
+        <strong>Gender:</strong> ${gender}<br>
+        <strong>Education:</strong> ${education.join(", ")}<br>
+        <strong>Likes Tea:</strong> ${tea}
+      `;
+
+      // Change submit button text and color
+      let btn = document.getElementById("submitBtn");
+      btn.innerText = "Submitted";
+      btn.style.backgroundColor = "#4CAF50";
+    }
+
+    // 2. Change Image
+    function changeImage() {
+      document.getElementById("myImage").src = "ransom.png";
+    }
+
+    // 3. Adjust Font Size
+    let currentSize = 16;
+    function adjustFontSize(change) {
+      currentSize += change;
+      document.getElementById("text").style.fontSize = currentSize + "px";
+    }
+
+    // 4. Show Date & Time
+    function showDateTime() {
+      const now = new Date();
+      document.getElementById("datetime").innerHTML = now.toLocaleString();
+    }
+    setInterval(showDateTime, 1000); // Update every second
+  </script>
+
+</body>
+</html>

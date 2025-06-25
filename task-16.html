@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>JavaScript Task Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -11,9 +12,8 @@
       background-color: rgb(192, 231, 218);
     }
 
-    /* Centering container */
     .container {
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto;
       background-color: rgb(203, 237, 230);
       padding: 20px;
@@ -29,9 +29,32 @@
       background-color: #f9f9f9;
     }
 
+    form input,
+    form select {
+      padding: 8px;
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .inline-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .inline-options label {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+
+    }
+
     button {
-      margin: 5px 0;
-      padding: 5px 10px;
+      margin: 5px 5px 15px 0;
+      padding: 10px 16px;
       background-color: gray;
       color: white;
       border: none;
@@ -40,14 +63,74 @@
       transition: background-color 0.3s ease;
     }
 
-    /* Hover effect */
     button:hover {
       background-color: #72df7d;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
     }
 
     #output h3 {
       color: green;
     }
+
+    #text {
+      font-size: 16px;
+    }
+
+    /* ----------- MEDIA QUERIES ----------- */
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+
+      .container {
+        padding: 15px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      button {
+        width: 100%;
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+
+      form input,
+      form select {
+        font-size: 16px;
+      }
+
+      .inline-options {
+        flex-direction: column;
+        padding:25px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h2 {
+        font-size: 18px;
+      }
+
+      #text {
+        font-size: 14px;
+      }
+
+      button {
+        font-size: 14px;
+        padding: 8px 12px;
+      }
+
+      section {
+        padding: 15px;
+      }
+    }
+    #th{text-align: center;}
   </style>
 </head>
 <body>
@@ -58,21 +141,31 @@
     <section>
       <h2>1. Basic Information Form</h2>
       <form id="infoForm">
-        Name: <input type="text" id="name"><br><br>
-        Mobile: <input type="text" id="mobile"><br><br>
-        Email: <input type="email" id="email"><br><br>
-        Gender:
-        <input type="radio" name="gender" value="Male"> Male
-        <input type="radio" name="gender" value="Female"> Female <br><br>
-        Education:
-        <input type="checkbox" value="10th">10th
-        <input type="checkbox" value="12th">12th
-        <input type="checkbox" value="Graduation">Graduation <br><br>
-        Do you like tea?
-        <select id="tea">
+        Name: <input type="text" id="name">
+        Mobile: <input type="text" id="mobile">
+        Email: <input type="email" id="email">
+
+        <label>Gender:</label>
+        <div class="inline-options">
+          <label><input type="checkbox" name="gender" value="Male"> Male</label>
+          <label><input type="checkbox" name="gender" value="Female"> Female</label>
+        </div><br>
+
+        <label>Education:</label>
+        <div class="inline-options">
+          <label><input type="checkbox" value="10th"> 10th</label>
+          <label><input type="checkbox" value="12th"> 12th</label>
+          <label><input type="checkbox" value="Graduation"> Graduation</label>
+        </div><br>
+
+        <label for="tea">Do you like tea?</label>
+        <select id="tea" required>
+          <option value="" disabled selected>Choose an option</option>
           <option value="Yes">Yes</option>
           <option value="No">No</option>
-        </select><br><br>
+          <option value="Sometimes">Sometimes</option>
+        </select><br>
+
         <button id="submitBtn" type="button" onclick="displayInfo()">Submit</button>
       </form>
       <div id="output" style="margin-top: 20px;"></div>
@@ -81,7 +174,8 @@
     <!-- 2. Change Image -->
     <section>
       <h2>2. Change Image on Button Click</h2>
-      <img id="myImage" src="Types-of-Malware.png" width="150" height="150"><br><br>
+      <img id="myImage" src="Types-of-Malware.png" alt="Malware Image">
+      <br><br>
       <button onclick="changeImage()">Change Image</button>
     </section>
 
@@ -108,7 +202,7 @@
       let mobile = document.getElementById("mobile").value;
       let email = document.getElementById("email").value;
       let gender = document.querySelector('input[name="gender"]:checked')?.value || 'Not selected';
-      
+
       let education = [];
       document.querySelectorAll('input[type="checkbox"]:checked').forEach(box => {
         education.push(box.value);
@@ -126,7 +220,7 @@
         <strong>Likes Tea:</strong> ${tea}
       `;
 
-      // Change submit button text and color
+      // Change submit button style
       let btn = document.getElementById("submitBtn");
       btn.innerText = "Submitted";
       btn.style.backgroundColor = "#4CAF50";
@@ -137,20 +231,21 @@
       document.getElementById("myImage").src = "ransom.png";
     }
 
-    // 3. Adjust Font Size
+    // 3. Font Size Adjustment
     let currentSize = 16;
     function adjustFontSize(change) {
       currentSize += change;
       document.getElementById("text").style.fontSize = currentSize + "px";
     }
 
-    // 4. Show Date & Time
+    // 4. Live Date & Time
     function showDateTime() {
       const now = new Date();
       document.getElementById("datetime").innerHTML = now.toLocaleString();
     }
     setInterval(showDateTime, 1000); // Update every second
   </script>
+  <h1 id="th">THANK YOU</h1>
 
 </body>
 </html>

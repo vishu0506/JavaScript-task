@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JavaScript Tasks Output</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #a1c9af;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      color: #eef2f4;
+      text-align: center;
+      background-color: #244931;
+      padding: 15px;
+    }
+
+    #ab{
+      text-align: center;
+    }
+
+    h2 {
+      color: #0b231b;
+      cursor: pointer;
+      text-decoration: underline;
+      font-size: 20px;
+    }
+
+    .task {
+      background-color: #e6f2ff;
+      margin: 15px 0;
+      padding: 15px;
+      border-left: 5px solid #4e0d3a;
+    }
+
+    .output {
+      display: none;
+      padding-top: 10px;
+      font-weight: normal;
+      font-size: 16px;
+    }
+
+    /* Responsive Styling for small screens */
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+
+      h1 {
+        font-size: 22px;
+        text-align: center;
+      }
+
+      h2 {
+        font-size: 18px;
+      }
+
+      .task {
+        padding: 10px;
+        margin: 10px 0;
+      }
+
+      .output {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>JavaScript Tasks-13 (Click to Show Output)</h1>
+
+  <div class="task">
+    <h2 onclick="toggleOutput(0)">Task 1: Name & Address</h2>
+    <div class="output" id="output0"></div>
+  </div>
+
+  <div class="task">
+    <h2 onclick="toggleOutput(1)">Task 2: Value and Type Comparison</h2>
+    <div class="output" id="output1"></div>
+  </div>
+
+  <div class="task">
+    <h2 onclick="toggleOutput(2)">Task 3: Combine Strings in Uppercase</h2>
+    <div class="output" id="output2"></div>
+  </div>
+
+  <div class="task">
+    <h2 onclick="toggleOutput(3)">Task 4: String Size in Bytes</h2>
+    <div class="output" id="output3"></div>
+  </div>
+
+  <div class="task">
+    <h2 onclick="toggleOutput(4)">Task 5: Round Number</h2>
+    <div class="output" id="output4"></div>
+  </div>
+
+  <script>
+    function toggleOutput(index) {
+      const output = document.getElementById("output" + index);
+      output.style.display = output.style.display === "none" ? "block" : "none";
+    }
+
+    // Task 1
+    let name = "Vishakha Kumari";
+    let address = "Hajipur, Vaishali, Bihar";
+    document.getElementById("output0").innerHTML = `Name: ${name}<br>Address: ${address}`;
+
+    // Task 2
+    let a = 15;
+    let b = "15";
+    let result2 = (a === b) ? "Both value and type are the same" : "Value or type are not the same";
+    document.getElementById("output1").innerHTML = result2;
+
+    // Task 3
+    let str1 = "hello";
+    let str2 = "world";
+    let combinedStr = (str1 + str2).toUpperCase();
+    document.getElementById("output2").innerHTML = `Combined Capitalized String: ${combinedStr}`;
+
+    // Task 4
+    function getStringSizeInBytes(str) {
+      return new Blob([str]).size;
+    }
+    let myString = "Hello World!";
+    let size = getStringSizeInBytes(myString);
+    document.getElementById("output3").innerHTML = `Size of "${myString}" in bytes: ${size}`;
+
+    // Task 5
+    function roundToDigits(num, digits) {
+      return parseFloat(num.toFixed(digits));
+    }
+    let number = 16.3456789;
+    let digits = 3;
+    let rounded = roundToDigits(number, digits);
+    document.getElementById("output4").innerHTML = `Rounded Number: ${rounded}`;
+  </script>
+  <h2 id="ab">THANK YOU</h2>
+</body>
+</html>
